@@ -44,7 +44,7 @@ Powered by [MaaFramework](https://github.com/MaaXYZ/MaaFramework) & [MXU](https:
 
 感谢以下开发者对 MaaEnd 作出的贡献：
 
-[![贡献者](https://contrib.rocks/image?repo=MaaEnd/MaaEnd&max=1000)](https://github.com/MistEO/MaaEnd/graphs/contributors)
+[![贡献者](https://contrib.rocks/image?repo=MaaEnd/MaaEnd&max=1000)](https://github.com/MaaEnd/MaaEnd/graphs/contributors)
 
 ## 沟通交流
 
