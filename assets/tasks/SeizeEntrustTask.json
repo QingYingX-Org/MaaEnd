@@ -15,7 +15,7 @@
         "SeizeEntrustTaskisGoDepotNodeWorld": {
             "type": "switch",
             "label": "是否要传送到仓储节点旁边的锚点",
-            "description": "开启后将传送到仓储节点旁边的锚点",
+            "description": "开启后将抢完单将自动传送到仓储节点上面的锚点",
             "cases": [
                 {
                     "name": "No",
