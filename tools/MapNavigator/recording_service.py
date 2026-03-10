@@ -8,7 +8,7 @@ import time
 from typing import Callable
 
 from model import ActionType, PathPoint, PathRecorder, is_key_pressed
-from runtime import AGENT_DIR, CPP_AGENT_EXE, MAAFW_BIN_DIR, MaaRuntime
+from runtime import AGENT_DIR, CPP_AGENT_EXE, MAAFW_BIN_DIR, MaaRuntime, get_agent_env
 
 
 StatusCallback = Callable[[str, str], None]
@@ -66,7 +66,8 @@ class RecordingService:
                 raise FileNotFoundError(f"找不到 Agent 可执行文件: {CPP_AGENT_EXE}")
 
             print(f"Starting Agent process: {CPP_AGENT_EXE} {agent_id}")
-            self._agent_process = subprocess.Popen([str(CPP_AGENT_EXE), agent_id], cwd=str(AGENT_DIR))
+            env = get_agent_env()
+            self._agent_process = subprocess.Popen([str(CPP_AGENT_EXE), agent_id], cwd=str(AGENT_DIR), env=env)
             
             print(f"Waiting {self.AGENT_BOOT_WAIT_SECONDS}s for Agent to boot...")
             time.sleep(self.AGENT_BOOT_WAIT_SECONDS)
@@ -139,8 +140,8 @@ class RecordingService:
         enum_windows = ctypes.windll.user32.EnumWindows
         enum_windows_proc = ctypes.WINFUNCTYPE(
             ctypes.c_bool,
-            ctypes.POINTER(ctypes.c_int),
-            ctypes.POINTER(ctypes.c_int),
+            ctypes.c_void_p,
+            ctypes.c_void_p,
         )
         get_window_text = ctypes.windll.user32.GetWindowTextW
         is_window_visible = ctypes.windll.user32.IsWindowVisible
@@ -174,7 +175,8 @@ class RecordingService:
                 return False
             return True
 
-        enum_windows(enum_windows_proc(foreach), 0)
+        cb = enum_windows_proc(foreach)
+        enum_windows(cb, 0)
         return result[0]
 
     @staticmethod

@@ -15,6 +15,15 @@ RESOURCE_DIR = PROJECT_ROOT / "assets" / "resource"
 MAP_IMAGE_DIR = RESOURCE_DIR / "image"
 
 
+def get_agent_env() -> dict[str, str]:
+    """获取启动 Agent 专用的环境变量，注入 DLL 搜索路径。"""
+    import os
+    env = os.environ.copy()
+    paths = [str(AGENT_DIR), str(MAAFW_BIN_DIR), env.get("PATH", "")]
+    env["PATH"] = os.pathsep.join(p for p in paths if p)
+    return env
+
+
 def configure_runtime_env() -> None:
     """配置 maafw 运行所需环境变量。"""
     os.environ["MAAFW_BINARY_PATH"] = str(MAAFW_BIN_DIR)
