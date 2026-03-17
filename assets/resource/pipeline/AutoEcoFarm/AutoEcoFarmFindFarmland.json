@@ -158,7 +158,9 @@
                 "key": 27 //esc键
             }
         },
-        "next": ["[Anchor]_AutoEcoFarmFindEcoFarmAnchor"]
+        "next": [
+            "[Anchor]_AutoEcoFarmFindEcoFarmAnchor"
+        ]
     },
 
     "_AutoEcoFarmFindValleyIVEcoFarm": {
