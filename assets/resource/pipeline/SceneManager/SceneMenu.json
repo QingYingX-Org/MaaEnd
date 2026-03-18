@@ -1297,8 +1297,13 @@
             }
         },
         "post_wait_freezes": {
-            "time": 500,
-            "timeout": 2000
+            "time": 400,
+            "target": [
+                0,
+                0,
+                200,
+                100
+            ]
         },
         "next": [
             "__ScenePrivateAnyEnterMenuShopSuccess"
